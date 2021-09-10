@@ -10,7 +10,8 @@ image_path=["hangman0.png","hangman1.png","hangman2.png","hangman3.png","hangman
 
 win=Tk()
 win.title("Hangman")
-win.geometry("800x500")
+win.geometry("600x500")
+win.resizable(0,0)
 win.iconbitmap("Hangman.ico")
 
 def init():
@@ -20,14 +21,14 @@ def init():
     global guessword
     guessword=[]
     for character in hiddenword:
-        guessword.append("*")
+        guessword.append("_")
 
     global hint
-    hint=Label(win, text= "length of the word:"+ str(wordlength))
+    hint=Label(win, text= "Length of the word:"+ str(wordlength))
     hint.grid(column=0,row=0)
 
     global lives
-    lives=Label(win, text="Tries left"+str(tries))
+    lives=Label(win, text="Tries left "+str(tries))
     lives.grid(column=0, row=1)
 
     global word_display
@@ -46,6 +47,112 @@ def init():
     panel = Label(win, image=img)
     panel.grid(column=0, row=7)
 
+    global button_A
+    global button_B
+    global button_C
+    global button_D
+    global button_E
+    global button_F
+    global button_G
+    global button_H
+    global button_I
+    global button_J
+    global button_K
+    global button_L
+    global button_M
+    global button_N
+    global button_O
+    global button_P
+    global button_Q
+    global button_R
+    global button_S
+    global button_T
+    global button_U
+    global button_V
+    global button_W
+    global button_X
+    global button_Y
+    global button_Z
+
+    button_A = Button(win, text="A", width=3, height=1)
+    button_A.place(x=10, y=400)
+
+    button_B = Button(win, text="B", width=3, height=1)
+    button_B.place(x=60, y=400)
+
+    button_C = Button(win, text="C", width=3, height=1)
+    button_C.place(x=110, y=400)
+
+    button_D = Button(win, text="D", width=3, height=1)
+    button_D.place(x=160, y=400)
+
+    button_E = Button(win, text="E", width=3, height=1)
+    button_E.place(x=210, y=400)
+
+    button_F = Button(win, text="F", width=3, height=1)
+    button_F.place(x=260, y=400)
+
+    button_G = Button(win, text="G", width=3, height=1)
+    button_G.place(x=310, y=400)
+
+    button_H = Button(win, text="H", width=3, height=1)
+    button_H.place(x=360, y=400)
+
+    button_I = Button(win, text="I", width=3, height=1)
+    button_I.place(x=410, y=400)
+
+    button_J = Button(win, text="J", width=3, height=1)
+    button_J.place(x=460, y=400)
+
+    button_K = Button(win, text="K", width=3, height=1)
+    button_K.place(x=510, y=400)
+
+    button_L = Button(win, text="L", width=3, height=1)
+    button_L.place(x=560, y=400)
+
+    button_M = Button(win, text="M", width=3, height=1)
+    button_M.place(x=10, y=430)
+
+    button_N = Button(win, text="N", width=3, height=1)
+    button_N.place(x=60, y=430)
+
+    button_O = Button(win, text="O", width=3, height=1)
+    button_O.place(x=110, y=430)
+
+    button_P = Button(win, text="P", width=3, height=1)
+    button_P.place(x=160, y=430)
+
+    button_Q = Button(win, text="Q", width=3, height=1)
+    button_Q.place(x=210, y=430)
+
+    button_R = Button(win, text="R", width=3, height=1)
+    button_R.place(x=260, y=430)
+
+    button_S = Button(win, text="S", width=3, height=1)
+    button_S.place(x=310, y=430)
+
+    button_T = Button(win, text="T", width=3, height=1)
+    button_T.place(x=360, y=430)
+
+    button_U = Button(win, text="U", width=3, height=1)
+    button_U.place(x=410, y=430)
+
+    button_V = Button(win, text="V", width=3, height=1)
+    button_V.place(x=460, y=430)
+
+    button_W = Button(win, text="W", width=3, height=1)
+    button_W.place(x=510, y=430)
+
+    button_X = Button(win, text="X", width=3, height=1)
+    button_X.place(x=560, y=430)
+
+    button_Y = Button(win, text="Y", width=3, height=1)
+    button_Y.place(x=10, y=460)
+
+    button_Z = Button(win, text="Z", width=3, height=1)
+    button_Z.place(x=60, y=460)
+
+
 def game_update(guess):
     global tries
     global hiddenword
@@ -56,7 +163,7 @@ def game_update(guess):
             if str(array[i])==guess:
                 guessword[i]=str(guess)
         word_display.configure(text=guessword)
-        if not "*" in guessword:
+        if not "_" in guessword:
             Win()
     else:
         tries=tries-1
@@ -66,7 +173,7 @@ def game_update(guess):
         panel.configure(image=img)
         panel.image=img
         if tries==0:
-            Loss()
+            Lose()
         tries.configure(text="Remaining chances"+str(tries))
         word_display.configure(text=guessword)
 
@@ -159,84 +266,6 @@ def game_restart():
     tries=6
     init()
 
+
 init()
-
-button_A=Button(win, text="A", width=1, height=1)
-button_A.grid(column=1, row=3)
-
-button_B=Button(win, text="B", width=1, height=1)
-button_B.grid(column=2, row=3)
-
-button_C=Button(win, text="C", width=1, height=1)
-button_C.grid(column=3, row=3)
-
-button_D=Button(win, text="D", width=1, height=1)
-button_D.grid(column=4, row=3)
-
-button_E=Button(win, text="E", width=1, height=1)
-button_E.grid(column=5, row=3)
-
-button_F=Button(win, text="F", width=1, height=1)
-button_F.grid(column=6, row=3)
-
-button_G=Button(win, text="G", width=1, height=1)
-button_G.grid(column=7, row=3)
-
-button_H=Button(win, text="H", width=1, height=1)
-button_H.grid(column=8, row=3)
-
-button_I=Button(win, text="I", width=1, height=1)
-button_I.grid(column=9, row=3)
-
-button_J=Button(win, text="J", width=1, height=1)
-button_J.grid(column=10, row=3)
-
-button_K=Button(win, text="K", width=1, height=1)
-button_K.grid(column=1, row=4)
-
-button_L=Button(win, text="L", width=1, height=1)
-button_L.grid(column=2, row=4)
-
-button_M=Button(win, text="M", width=1, height=1)
-button_M.grid(column=3, row=4)
-
-button_N=Button(win, text="N", width=1, height=1)
-button_N.grid(column=4, row=4)
-
-button_O=Button(win, text="O", width=1, height=1)
-button_O.grid(column=5, row=4)
-
-button_P=Button(win, text="P", width=1, height=1)
-button_P.grid(column=6, row=4)
-
-button_Q=Button(win, text="Q", width=1, height=1)
-button_Q.grid(column=7, row=4)
-
-button_R=Button(win, text="R", width=1, height=1)
-button_R.grid(column=8, row=4)
-
-button_S=Button(win, text="S", width=1, height=1)
-button_S.grid(column=9, row=4)
-
-button_T=Button(win, text="T", width=1, height=1)
-button_T.grid(column=1, row=5)
-
-button_U=Button(win, text="U", width=1, height=1)
-button_U.grid(column=2, row=5)
-
-button_V=Button(win, text="V", width=1, height=1)
-button_V.grid(column=3, row=5)
-
-button_W=Button(win, text="W", width=1, height=1)
-button_W.grid(column=4, row=5)
-
-button_X=Button(win, text="X", width=1, height=1)
-button_X.grid(column=5, row=5)
-
-button_Y=Button(win, text="Y", width=1, height=1)
-button_Y.grid(column=6, row=5)
-
-button_Z=Button(win, text="Z", width=1, height=1)
-button_Z.grid(column=7, row=5)
-
 win.mainloop()
