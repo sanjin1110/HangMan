@@ -133,7 +133,7 @@ def Win():
     status.configure(text="You Win!\n Your score is"+str(score))
     game_disable()
     global button_continue
-    button_continue=Button(win, text="New")
+    button_continue=Button(win, text="New", command=lambda:game_restart)
     button_continue(column=0, row=8)
     init()
 
@@ -141,13 +141,25 @@ def Lose():
     status.configure(text="You Win!\n Your score is"+str(score))
     game_disable()
     global button_continue
-    button_continue=Button(win, text="Restart" )
+    button_continue=Button(win, text="Restart", command=lambda:next_game())
     button_continue(column=0, row=8)
     init()
 
+def next_game():
+    game_destroy()
+    global tries
+    tries=6
+    init()
 
+def game_restart():
+    game_destroy()
+    global score
+    score=0
+    global tries
+    tries=6
+    init()
 
-
+init()
 
 button_A=Button(win, text="A", width=1, height=1)
 button_A.grid(column=1, row=3)
