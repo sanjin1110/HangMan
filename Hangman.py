@@ -70,6 +70,80 @@ def game_update(guess):
         tries.configure(text="Remaining chances"+str(tries))
         word_display.configure(text=guessword)
 
+def game_disable():
+    button_A.configure(state="disabled")
+    button_B.configure(state="disabled")
+    button_C.configure(state="disabled")
+    button_D.configure(state="disabled")
+    button_E.configure(state="disabled")
+    button_F.configure(state="disabled")
+    button_G.configure(state="disabled")
+    button_H.configure(state="disabled")
+    button_I.configure(state="disabled")
+    button_J.configure(state="disabled")
+    button_K.configure(state="disabled")
+    button_L.configure(state="disabled")
+    button_M.configure(state="disabled")
+    button_N.configure(state="disabled")
+    button_O.configure(state="disabled")
+    button_P.configure(state="disabled")
+    button_Q.configure(state="disabled")
+    button_R.configure(state="disabled")
+    button_S.configure(state="disabled")
+    button_T.configure(state="disabled")
+    button_U.configure(state="disabled")
+    button_V.configure(state="disabled")
+    button_W.configure(state="disabled")
+    button_X.configure(state="disabled")
+    button_Y.configure(state="disabled")
+    button_Z.configure(state="disabled")
+
+def game_destroy():
+    button_A.destroy()
+    button_B.destroy()
+    button_C.destroy()
+    button_D.destroy()
+    button_E.destroy()
+    button_F.destroy()
+    button_G.destroy()
+    button_H.destroy()
+    button_I.destroy()
+    button_J.destroy()
+    button_K.destroy()
+    button_L.destroy()
+    button_M.destroy()
+    button_N.destroy()
+    button_O.destroy()
+    button_P.destroy()
+    button_Q.destroy()
+    button_R.destroy()
+    button_S.destroy()
+    button_T.destroy()
+    button_U.destroy()
+    button_V.destroy()
+    button_W.destroy()
+    button_X.destroy()
+    button_Y.destroy()
+    button_Z.destroy()
+
+
+def Win():
+    global score
+    score=score+1
+    status.configure(text="You Win!\n Your score is"+str(score))
+    game_disable()
+    global button_continue
+    button_continue=Button(win, text="New")
+    button_continue(column=0, row=8)
+    init()
+
+def Lose():
+    status.configure(text="You Win!\n Your score is"+str(score))
+    game_disable()
+    global button_continue
+    button_continue=Button(win, text="Restart" )
+    button_continue(column=0, row=8)
+    init()
 
 
 
