@@ -35,6 +35,12 @@ def init():
     word_display.grid(column=0,row=2)
 
 
+img=Image.open(image_path[tries])
+img=img.resize((200,200), Image.ANTIALIAS)
+img=ImageTk.PhotoImage(img)
+panel=Label(win, image=img)
+panel.grid(column=0, row=7)
+
 button_A=Button(win, text="A", width=1, height=1)
 button_A.grid(column=1, row=3)
 
