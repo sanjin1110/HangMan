@@ -34,12 +34,46 @@ def init():
     word_display=Label(win,text=guessword)
     word_display.grid(column=0,row=2)
 
+    global status
+    status=Label(win, text= "In Progress...")
+    status.grid(column=0, row=6)
 
-img=Image.open(image_path[tries])
-img=img.resize((200,200), Image.ANTIALIAS)
-img=ImageTk.PhotoImage(img)
-panel=Label(win, image=img)
-panel.grid(column=0, row=7)
+    global img
+    img = Image.open(image_path[tries])
+    img = img.resize((200, 200), Image.ANTIALIAS)
+    img = ImageTk.PhotoImage(img)
+    global panel
+    panel = Label(win, image=img)
+    panel.grid(column=0, row=7)
+
+def game_update(guess):
+    global tries
+    global hiddenword
+
+    if guess in hiddenword:
+        array=list(hiddenword)
+        for i in range(0, len(hiddenword)):
+            if str(array[i])==guess:
+                guessword[i]=str(guess)
+        word_display.configure(text=guessword)
+        if not "*" in guessword:
+            Win()
+    else:
+        tries=tries-1
+        image = Image.open(image_path[tries])
+        image = image.resize((200, 200), Image.ANTIALIAS)
+        img = ImageTk.PhotoImage(image)
+        panel.configure(image=img)
+        panel.image=img
+        if tries==0:
+            Loss()
+        tries.configure(text="Remaining chances"+str(tries))
+        word_display.configure(text=guessword)
+
+
+
+
+
 
 button_A=Button(win, text="A", width=1, height=1)
 button_A.grid(column=1, row=3)
