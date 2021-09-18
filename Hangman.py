@@ -2,10 +2,10 @@ from tkinter import*
 from PIL import ImageTk,Image
 import random
 
-wordlist=["Nuwakot","Kathmandu", "Bhaktapur", "Chitwan", "Pokhara"]
+wordlist=["CAT","BEAR", "TIGER", "JACKAL", "CHEETAH","ELEPHANT","MEGALODON"]
 tries=6
 score=0
-image_path=["hangman0.png","hangman1.png","hangman2.png","hangman3.png","hangman4.png","hangman5.png","hangman6.png"]
+image_path=["hangman6.png","hangman5.png","hangman4.png","hangman3.png","hangman2.png","hangman1.png","hangman0.png"]
 
 win=Tk()
 win.title("Hangman")
@@ -22,20 +22,96 @@ def init():
     for character in hiddenword:
         guessword.append("_")
 
-    global hint
-    hint=Label(win, text= "Length of the word:"+ str(wordlength))
-    hint.grid(column=0,row=0)
-
     global lives
-    lives=Label(win, text="Tries left "+str(tries))
+    lives=Label(win, text="Tries left : "+str(tries))
     lives.grid(column=0, row=1)
 
     global word_display
     word_display=Label(win,text=guessword)
     word_display.grid(column=0,row=2)
 
+    global button_A,button_B,button_C,button_D,button_E,button_F,button_G,button_H,button_I,button_J,button_K,button_L,button_M,button_N,button_O,button_P,button_Q,button_R,button_S,button_T,button_U,button_V,button_W,button_X,button_Y,button_Z
+
+    button_A = Button(win, text="A", width=3, height=1, command=lambda: game_update("A"))
+    button_A.place(x=10, y=400)
+
+    button_B = Button(win, text="B", width=3, height=1, command=lambda: game_update("B"))
+    button_B.place(x=60, y=400)
+
+    button_C = Button(win, text="C", width=3, height=1, command=lambda: game_update("C"))
+    button_C.place(x=110, y=400)
+
+    button_D = Button(win, text="D", width=3, height=1, command=lambda: game_update("D"))
+    button_D.place(x=160, y=400)
+
+    button_E = Button(win, text="E", width=3, height=1, command=lambda: game_update("E"))
+    button_E.place(x=210, y=400)
+
+    button_F = Button(win, text="F", width=3, height=1, command=lambda: game_update("F"))
+    button_F.place(x=260, y=400)
+
+    button_G = Button(win, text="G", width=3, height=1, command=lambda: game_update("G"))
+    button_G.place(x=310, y=400)
+
+    button_H = Button(win, text="H", width=3, height=1, command=lambda: game_update("H"))
+    button_H.place(x=360, y=400)
+
+    button_I = Button(win, text="I", width=3, height=1, command=lambda: game_update("I"))
+    button_I.place(x=410, y=400)
+
+    button_J = Button(win, text="J", width=3, height=1, command=lambda: game_update("J"))
+    button_J.place(x=460, y=400)
+
+    button_K = Button(win, text="K", width=3, height=1, command=lambda: game_update("K"))
+    button_K.place(x=510, y=400)
+
+    button_L = Button(win, text="L", width=3, height=1, command=lambda: game_update("L"))
+    button_L.place(x=560, y=400)
+
+    button_M = Button(win, text="M", width=3, height=1, command=lambda: game_update("M"))
+    button_M.place(x=10, y=430)
+
+    button_N = Button(win, text="N", width=3, height=1, command=lambda: game_update("N"))
+    button_N.place(x=60, y=430)
+
+    button_O = Button(win, text="O", width=3, height=1, command=lambda: game_update("O"))
+    button_O.place(x=110, y=430)
+
+    button_P = Button(win, text="P", width=3, height=1, command=lambda: game_update("P"))
+    button_P.place(x=160, y=430)
+
+    button_Q = Button(win, text="Q", width=3, height=1, command=lambda: game_update("Q"))
+    button_Q.place(x=210, y=430)
+
+    button_R = Button(win, text="R", width=3, height=1, command=lambda: game_update("R"))
+    button_R.place(x=260, y=430)
+
+    button_S = Button(win, text="S", width=3, height=1, command=lambda: game_update("S"))
+    button_S.place(x=310, y=430)
+
+    button_T = Button(win, text="T", width=3, height=1, command=lambda: game_update("T"))
+    button_T.place(x=360, y=430)
+
+    button_U = Button(win, text="U", width=3, height=1, command=lambda: game_update("U"))
+    button_U.place(x=410, y=430)
+
+    button_V = Button(win, text="V", width=3, height=1, command=lambda: game_update("V"))
+    button_V.place(x=460, y=430)
+
+    button_W = Button(win, text="W", width=3, height=1, command=lambda: game_update("W"))
+    button_W.place(x=510, y=430)
+
+    button_X = Button(win, text="X", width=3, height=1, command=lambda: game_update("X"))
+    button_X.place(x=560, y=430)
+
+    button_Y = Button(win, text="Y", width=3, height=1, command=lambda: game_update("Y"))
+    button_Y.place(x=10, y=460)
+
+    button_Z = Button(win, text="Z", width=3, height=1, command=lambda: game_update("Z"))
+    button_Z.place(x=60, y=460)
+
     global status
-    status=Label(win, text= "In Progress...")
+    status=Label(win, text="Game in progress...")
     status.grid(column=0, row=6)
 
     global img
@@ -45,9 +121,6 @@ def init():
     global panel
     panel = Label(win, image=img)
     panel.grid(column=0, row=7)
-
-
-
 
 
 def game_update(guess):
@@ -71,7 +144,7 @@ def game_update(guess):
         panel.image=img
         if tries==0:
             Lose()
-        tries.configure(text="Remaining chances"+str(tries))
+        lives.configure(text="\t Chances Remaining :"+str(tries))
         word_display.configure(text=guessword)
 
 def game_disable():
@@ -129,33 +202,36 @@ def game_destroy():
     button_X.destroy()
     button_Y.destroy()
     button_Z.destroy()
-
+    lives.destroy()
+    panel.destroy()
+    word_display.destroy()
+    status.destroy()
+    button_continue.destroy()
 
 def Win():
     global score
-    score=score+1
-    status.configure(text="You Win!\n Your score is"+str(score))
+    score=score + 1
+    status.configure(text="You won!\n Your Score :"+str(score))
     game_disable()
     global button_continue
-    button_continue=Button(win, text="New", command=lambda:game_restart)
-    button_continue(column=0, row=8)
-    init()
+    button_continue = Button(win, text="Next-Game", command=lambda: menu())
+    button_continue.grid(column=0, row=8)
 
 def Lose():
-    status.configure(text="You Win!\n Your score is"+str(score))
+    status.configure(text="You Lost!\n Your score :"+str(score)+ "\n Correct word="+ hiddenword)
     game_disable()
     global button_continue
-    button_continue=Button(win, text="Restart", command=lambda:next_game())
-    button_continue(column=0, row=8)
-    init()
+    button_continue = Button(win, text="Restart", command=lambda: restart())
+    button_continue.grid(column=0, row=8)
 
-def next_game():
+
+def menu():
     game_destroy()
     global tries
     tries=6
     init()
 
-def game_restart():
+def restart():
     game_destroy()
     global score
     score=0
@@ -163,84 +239,10 @@ def game_restart():
     tries=6
     init()
 
-button_A = Button(win, text="A", width=3, height=1, command=lambda:game_update("A"))
-button_A.place(x=10, y=400)
 
-button_B = Button(win, text="B", width=3, height=1, command=lambda:game_update("B"))
-button_B.place(x=60, y=400)
 
-button_C = Button(win, text="C", width=3, height=1, command=lambda:game_update("C"))
-button_C.place(x=110, y=400)
-
-button_D = Button(win, text="D", width=3, height=1, command=lambda:game_update("D"))
-button_D.place(x=160, y=400)
-
-button_E = Button(win, text="E", width=3, height=1, command=lambda:game_update("E"))
-button_E.place(x=210, y=400)
-
-button_F = Button(win, text="F", width=3, height=1, command=lambda:game_update("F"))
-button_F.place(x=260, y=400)
-
-button_G = Button(win, text="G", width=3, height=1, command=lambda:game_update("G"))
-button_G.place(x=310, y=400)
-
-button_H = Button(win, text="H", width=3, height=1, command=lambda:game_update("H"))
-button_H.place(x=360, y=400)
-
-button_I = Button(win, text="I", width=3, height=1, command=lambda:game_update("I"))
-button_I.place(x=410, y=400)
-
-button_J = Button(win, text="J", width=3, height=1, command=lambda:game_update("J"))
-button_J.place(x=460, y=400)
-
-button_K = Button(win, text="K", width=3, height=1, command=lambda:game_update("K"))
-button_K.place(x=510, y=400)
-
-button_L = Button(win, text="L", width=3, height=1, command=lambda:game_update("L"))
-button_L.place(x=560, y=400)
-
-button_M = Button(win, text="M", width=3, height=1, command=lambda:game_update("M"))
-button_M.place(x=10, y=430)
-
-button_N = Button(win, text="N", width=3, height=1, command=lambda:game_update("N"))
-button_N.place(x=60, y=430)
-
-button_O = Button(win, text="O", width=3, height=1, command=lambda:game_update("O"))
-button_O.place(x=110, y=430)
-
-button_P = Button(win, text="P", width=3, height=1, command=lambda:game_update("P"))
-button_P.place(x=160, y=430)
-
-button_Q = Button(win, text="Q", width=3, height=1, command=lambda:game_update("Q"))
-button_Q.place(x=210, y=430)
-
-button_R = Button(win, text="R", width=3, height=1, command=lambda:game_update("R"))
-button_R.place(x=260, y=430)
-
-button_S = Button(win, text="S", width=3, height=1, command=lambda:game_update("S"))
-button_S.place(x=310, y=430)
-
-button_T = Button(win, text="T", width=3, height=1, command=lambda:game_update("T"))
-button_T.place(x=360, y=430)
-
-button_U = Button(win, text="U", width=3, height=1, command=lambda:game_update("U"))
-button_U.place(x=410, y=430)
-
-button_V = Button(win, text="V", width=3, height=1, command=lambda:game_update("V"))
-button_V.place(x=460, y=430)
-
-button_W = Button(win, text="W", width=3, height=1, command=lambda:game_update("W"))
-button_W.place(x=510, y=430)
-
-button_X = Button(win, text="X", width=3, height=1, command=lambda:game_update("X"))
-button_X.place(x=560, y=430)
-
-button_Y = Button(win, text="Y", width=3, height=1, command=lambda:game_update("Y"))
-button_Y.place(x=10, y=460)
-
-button_Z = Button(win, text="Z", width=3, height=1, command=lambda:game_update("Z"))
-button_Z.place(x=60, y=460)
 
 
 init()
+
 win.mainloop()
