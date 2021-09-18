@@ -2,22 +2,27 @@ from tkinter import*
 from PIL import ImageTk,Image
 import random
 
-animal_list=["CAT","BEAR", "TIGER", "JACKAL", "CHEETAH","ELEPHANT","MEGALODON"]
+# Created word_list for hangman
+word_list=["CAT","BEAR", "TIGER", "JACKAL", "CHEETAH","ELEPHANT","HEN", "DOVE", "CRANE", "PEACOCK", "FLAMINGO"]
+
+#Setup score and chances
 tries=6
 score=0
+
+#shows path of images in folder
 image_path=["hangman6.png","hangman5.png","hangman4.png","hangman3.png","hangman2.png","hangman1.png","hangman0.png"]
 
+#Created tkinter window
 win=Tk()
 win.title("Hangman")
 win.geometry("600x500")
 win.resizable(0,0)
 win.iconbitmap("Hangman.ico")
 
+#setup Hangman UI
 def init():
-
     global hiddenword
-    hiddenword=random.choice(animal_list)
-
+    hiddenword=random.choice(word_list)
     global guessword
     guessword=[]
     for character in hiddenword:
@@ -27,9 +32,21 @@ def init():
     lives=Label(win, text="Tries left : "+str(tries), font="bold")
     lives.place(x=450, y=0)
 
+    global text_status
+    text_status=Label(win, font="bold")
+    text_status.place(x=250, y=100 )
+
+    global score_status
+    score_status=Label(win, text="Score : "+ str(score), font="bold")
+    score_status.place(x=455, y=20)
+
     global word_display
     word_display=Label(win,text=guessword, font="20" "bold")
-    word_display.place(x=200,y=150)
+    word_display.place(x=200,y=160)
+
+    global correct_word
+    correct_word=Label(win, font="bold")
+    correct_word.place(x=200, y=200)
 
     global button_A,button_B,button_C,button_D,button_E,button_F,button_G,button_H,button_I,button_J,button_K,button_L,button_M,button_N,button_O,button_P,button_Q,button_R,button_S,button_T,button_U,button_V,button_W,button_X,button_Y,button_Z
 
@@ -111,10 +128,6 @@ def init():
     button_Z = Button(win, text="Z", width=3, height=1, command=lambda: game_update("Z"))
     button_Z.place(x=60, y=460)
 
-    global status
-    status=Label(win)
-    status.place(x=0, y=0)
-
     global img
     img = Image.open(image_path[tries])
     img = img.resize((200, 200), Image.ANTIALIAS)
@@ -123,10 +136,12 @@ def init():
     panel = Label(win, image=img)
     panel.place(x=0, y=100)
 
-
+#Updates Game when button is pressed.
 def game_update(guess):
     global tries
     global hiddenword
+    global score
+
 
     if guess in hiddenword:
         array=list(hiddenword)
@@ -134,6 +149,8 @@ def game_update(guess):
             if str(array[i])==guess:
                 guessword[i]=str(guess)
         word_display.configure(text=guessword)
+        score = score + 1
+        score_status.configure(text="Score : " + str(score))
         if not "__" in guessword:
             Win()
     else:
@@ -148,6 +165,7 @@ def game_update(guess):
         lives.configure(text="Tries left : "+str(tries))
         word_display.configure(text=guessword)
 
+#Prevents reuse of same button
 def game_disable():
     button_A.configure(state="disabled")
     button_B.configure(state="disabled")
@@ -176,6 +194,7 @@ def game_disable():
     button_Y.configure(state="disabled")
     button_Z.configure(state="disabled")
 
+#Cleans-up existing UI
 def game_destroy():
     button_A.destroy()
     button_B.destroy()
@@ -206,40 +225,62 @@ def game_destroy():
     lives.destroy()
     panel.destroy()
     word_display.destroy()
-    status.destroy()
     button_continue.destroy()
+    score_status.destroy()
+    text_status.destroy()
+    correct_word.destroy()
 
+#Shows win menu when game is won
 def Win():
-    global score
-    score=score + 1
-    status.configure(text="You won!\n Your Score :"+str(score))
+
+    global text_status
+    text_status.configure(text="You won!")
+
     game_disable()
+
     global button_continue
     button_continue = Button(win, text="New Game", font="bold", command=lambda: new_game())
-    button_continue.place(x=200, y=200)
+    button_continue.place(x=450, y=160)
 
+#Shows lose menu when game is lost
 def Lose():
-    status.configure(text="You Lost!\n Your score :"+str(score)+ "\n Correct word="+ hiddenword)
+
+    global text_status
+    text_status.configure(text="YOU LOSE!" , font="bold")
+
+    global correct_Word
+    correct_word.configure(text="Correct Word : "+ str(hiddenword))
+
+
     game_disable()
+
     global button_continue
     button_continue = Button(win, text="Restart", font="bold", command=lambda: restart())
-    button_continue.place(x=200, y=200)
+    button_continue.place(x=450, y=160)
 
-
+# Starts new game after winning
 def new_game():
-    game_destroy()
-    global tries
-    tries=6
-    init()
 
-def restart():
     game_destroy()
+
     global score
     score=0
+
+    global tries
+    tries=6
+
+    init()
+
+#restarts game when game is lost
+def restart():
+    game_destroy()
+
+    global score
+    score=0
+
     global tries
     tries=6
     init()
 
 init()
-
 win.mainloop()
