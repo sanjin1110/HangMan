@@ -14,15 +14,14 @@ win.resizable(0,0)
 win.iconbitmap("Hangman.ico")
 
 def init():
+
     global hiddenword
     hiddenword=random.choice(animal_list)
-    wordlength=len(hiddenword)
+
     global guessword
     guessword=[]
     for character in hiddenword:
-        guessword.append("___")
-
-
+        guessword.append("__")
 
     global lives
     lives=Label(win, text="Tries left : "+str(tries), font="bold")
@@ -135,7 +134,7 @@ def game_update(guess):
             if str(array[i])==guess:
                 guessword[i]=str(guess)
         word_display.configure(text=guessword)
-        if not "___" in guessword:
+        if not "__" in guessword:
             Win()
     else:
         tries=tries-1
@@ -216,18 +215,18 @@ def Win():
     status.configure(text="You won!\n Your Score :"+str(score))
     game_disable()
     global button_continue
-    button_continue = Button(win, text="New Game", font="bold", command=lambda: menu())
-    button_continue.place(x=300, y=200)
+    button_continue = Button(win, text="New Game", font="bold", command=lambda: new_game())
+    button_continue.place(x=200, y=200)
 
 def Lose():
     status.configure(text="You Lost!\n Your score :"+str(score)+ "\n Correct word="+ hiddenword)
     game_disable()
     global button_continue
     button_continue = Button(win, text="Restart", font="bold", command=lambda: restart())
-    button_continue.place(x=300, y=200)
+    button_continue.place(x=200, y=200)
 
 
-def menu():
+def new_game():
     game_destroy()
     global tries
     tries=6
