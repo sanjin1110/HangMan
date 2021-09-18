@@ -2,7 +2,7 @@ from tkinter import*
 from PIL import ImageTk,Image
 import random
 
-wordlist=["CAT","BEAR", "TIGER", "JACKAL", "CHEETAH","ELEPHANT","MEGALODON"]
+animal_list=["CAT","BEAR", "TIGER", "JACKAL", "CHEETAH","ELEPHANT","MEGALODON"]
 tries=6
 score=0
 image_path=["hangman6.png","hangman5.png","hangman4.png","hangman3.png","hangman2.png","hangman1.png","hangman0.png"]
@@ -15,20 +15,22 @@ win.iconbitmap("Hangman.ico")
 
 def init():
     global hiddenword
-    hiddenword=random.choice(wordlist)
+    hiddenword=random.choice(animal_list)
     wordlength=len(hiddenword)
     global guessword
     guessword=[]
     for character in hiddenword:
-        guessword.append("_")
+        guessword.append("___")
+
+
 
     global lives
-    lives=Label(win, text="Tries left : "+str(tries))
-    lives.grid(column=0, row=1)
+    lives=Label(win, text="Tries left : "+str(tries), font="bold")
+    lives.place(x=450, y=0)
 
     global word_display
-    word_display=Label(win,text=guessword)
-    word_display.grid(column=0,row=2)
+    word_display=Label(win,text=guessword, font="20" "bold")
+    word_display.place(x=200,y=150)
 
     global button_A,button_B,button_C,button_D,button_E,button_F,button_G,button_H,button_I,button_J,button_K,button_L,button_M,button_N,button_O,button_P,button_Q,button_R,button_S,button_T,button_U,button_V,button_W,button_X,button_Y,button_Z
 
@@ -111,8 +113,8 @@ def init():
     button_Z.place(x=60, y=460)
 
     global status
-    status=Label(win, text="Game in progress...")
-    status.grid(column=0, row=6)
+    status=Label(win)
+    status.place(x=0, y=0)
 
     global img
     img = Image.open(image_path[tries])
@@ -120,7 +122,7 @@ def init():
     img = ImageTk.PhotoImage(img)
     global panel
     panel = Label(win, image=img)
-    panel.grid(column=0, row=7)
+    panel.place(x=0, y=100)
 
 
 def game_update(guess):
@@ -133,7 +135,7 @@ def game_update(guess):
             if str(array[i])==guess:
                 guessword[i]=str(guess)
         word_display.configure(text=guessword)
-        if not "_" in guessword:
+        if not "___" in guessword:
             Win()
     else:
         tries=tries-1
@@ -144,7 +146,7 @@ def game_update(guess):
         panel.image=img
         if tries==0:
             Lose()
-        lives.configure(text="\t Chances Remaining :"+str(tries))
+        lives.configure(text="Tries left : "+str(tries))
         word_display.configure(text=guessword)
 
 def game_disable():
@@ -214,15 +216,15 @@ def Win():
     status.configure(text="You won!\n Your Score :"+str(score))
     game_disable()
     global button_continue
-    button_continue = Button(win, text="Next-Game", command=lambda: menu())
-    button_continue.grid(column=0, row=8)
+    button_continue = Button(win, text="New Game", font="bold", command=lambda: menu())
+    button_continue.place(x=300, y=200)
 
 def Lose():
     status.configure(text="You Lost!\n Your score :"+str(score)+ "\n Correct word="+ hiddenword)
     game_disable()
     global button_continue
-    button_continue = Button(win, text="Restart", command=lambda: restart())
-    button_continue.grid(column=0, row=8)
+    button_continue = Button(win, text="Restart", font="bold", command=lambda: restart())
+    button_continue.place(x=300, y=200)
 
 
 def menu():
@@ -238,10 +240,6 @@ def restart():
     global tries
     tries=6
     init()
-
-
-
-
 
 init()
 
