@@ -19,6 +19,7 @@ win.geometry("600x500")
 win.resizable(0,0)
 win.iconbitmap("Hangman.ico")
 
+
 #setup Hangman UI
 def init():
     global hiddenword
@@ -38,7 +39,7 @@ def init():
 
     global score_status
     score_status=Label(win, text="Score : "+ str(score), font="bold")
-    score_status.place(x=455, y=20)
+    score_status.place(x=455, y=25)
 
     global word_display
     word_display=Label(win,text=guessword, font="20" "bold")
@@ -52,6 +53,7 @@ def init():
 
     button_A = Button(win, text="A", width=3, height=1, command=lambda: game_update("A"))
     button_A.place(x=10, y=400)
+
 
     button_B = Button(win, text="B", width=3, height=1, command=lambda: game_update("B"))
     button_B.place(x=60, y=400)
@@ -144,7 +146,6 @@ def game_update(guess):
     global tries
     global hiddenword
     global score
-
 
     if guess in hiddenword:
         array=list(hiddenword)
