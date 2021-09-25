@@ -3,7 +3,8 @@ from PIL import ImageTk,Image
 import random
 
 # Created word_list for hangman
-word_list=["CAT","BEAR", "TIGER", "JACKAL", "CHEETAH","ELEPHANT","HEN", "DOVE", "CRANE", "PEACOCK", "FLAMINGO"]
+word_list=["CAT","BEAR", "LION", "COMPUTER","CHINA", "NEPAL","DENMARK","HEN", "DOVE", "CRANE", "NAME", "PLACE", "FAST",
+           "SLOW", "KING", "THOR", "KRATOS", "DANTE", "VIDEO", "MUSIC" ]
 
 #Setup score and chances
 tries=6
@@ -49,7 +50,9 @@ def init():
     correct_word=Label(win, font="bold")
     correct_word.place(x=200, y=200)
 
-    global button_A,button_B,button_C,button_D,button_E,button_F,button_G,button_H,button_I,button_J,button_K,button_L,button_M,button_N,button_O,button_P,button_Q,button_R,button_S,button_T,button_U,button_V,button_W,button_X,button_Y,button_Z
+    global button_A,button_B,button_C,button_D,button_E,button_F,button_G,button_H,button_I,button_J,button_K,button_L,\
+        button_M,button_N,button_O,button_P,button_Q,button_R,button_S,button_T,button_U,button_V,button_W,button_X,\
+        button_Y,button_Z
 
     button_A = Button(win, text="A", width=3, height=1, command=lambda: game_update("A"))
     button_A.place(x=10, y=400)
