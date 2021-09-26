@@ -1,7 +1,7 @@
 from tkinter import *
 import sqlite3
 from tkinter import messagebox
-import login
+import Login
 root =Tk()
 coon=sqlite3.connect("data_base_hang.db")
 # c=coon.cursor()
@@ -12,16 +12,16 @@ coon=sqlite3.connect("data_base_hang.db")
 #             phone integer)
 # """)
 # print("DATABASE created")
-
-
+#
+#
 def submit():
     coon=sqlite3.connect("data_base_hang.db")
     c=coon.cursor()
     c.execute("INSERT INTO everyone VALUES(:username,:mail,:password,:phone)", {
-        'username': login.ent1.get(),
-        'mail': login.ent2.get(),
-        'password': login.ent3.get(),
-        'phone': login.ent4.get()
+        'username': Login.ent1.get(),
+        'mail': Login.ent2.get(),
+        'password': Login.ent3.get(),
+        'phone': Login.ent4.get()
         # 'username': username_entry.get(),
         # 'mail': mail_entry.get(),
         # 'password': password_entry.get(),
@@ -30,15 +30,15 @@ def submit():
     messagebox.showinfo("everyone","successfully inserted")
     coon.commit()
     coon.close()
-    login.ent1.delete(0,END)
-    login.ent2.delete(0, END)
-    login.ent3.delete(0, END)
-    login.ent4.delete(0,END)
+    Login.ent1.delete(0,END)
+    Login.ent2.delete(0, END)
+    Login.ent3.delete(0, END)
+    Login.ent4.delete(0,END)
 
-    # username_entry.delete(0,END)
-    # mail_entry.delete(0,END)
-    # password_entry.delete(0,END)
-    # phone_number_entry.delete(0,END)
+    username_entry.delete(0,END)
+    mail_entry.delete(0,END)
+    password_entry.delete(0,END)
+    phone_number_entry.delete(0,END)
 
 def query():
     coon=sqlite3.connect("data_base_hang.db")
