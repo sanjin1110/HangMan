@@ -275,16 +275,19 @@ def Lose():
 
 # Starts new game after winning
 def new_game():
+    try:
+        game_destroy()
 
-    game_destroy()
+        global score
+        score = 0
 
-    global score
-    score=0
+        global tries
+        tries = 6
 
-    global tries
-    tries=6
-
-    init()
+        init()
+    except:
+        print("Error Occurred During Execution")
+        print("Restart the game")
 
 #restarts game when game is lost
 def restart():
