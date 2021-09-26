@@ -150,6 +150,7 @@ def game_update(guess):
     global hiddenword
     global score
     try:
+                      
         if guess in hiddenword:
             array = list(hiddenword)
             for i in range(0, len(hiddenword)):
@@ -161,7 +162,9 @@ def game_update(guess):
             if "__" not in guessword:
                 Win()
         else:
+           
             try:
+                                 
                 tries = tries - 1
                 image = Image.open(image_path[tries])
                 image = image.resize((200, 200), Image.ANTIALIAS)
