@@ -62,7 +62,7 @@ def init():
     button_A = Button(win, text="A", width=3, height=1, command=lambda: game_update("A"))
     button_A.place(x=10, y=400)
 
-    button_B = Button(win, text="B", width=3, height=1, command=lambda: game_update("B"))
+    button_B = Button(win, text="B", width=3, height=1, command=lambda:[game_update("B"),button_disable("B")])
     button_B.place(x=60, y=400)
 
     button_C = Button(win, text="C", width=3, height=1, command=lambda: game_update("C"))
@@ -154,7 +154,6 @@ def game_update(guess):
     global tries
     global hiddenword
     global score
-
     try:
                       
         if guess in hiddenword:
@@ -185,6 +184,61 @@ def game_update(guess):
                 print(msg)
     except FileNotFoundError as msg:
         print(msg)
+
+
+def button_disable():
+
+        button_A.configure(state="disabled")
+
+
+        button_B.configure(state="disabled")
+
+        button_C.configure(state="disabled")
+
+        button_D.configure(state="disabled")
+        button_E.configure(state="disabled")
+
+        button_F.configure(state="disabled")
+
+        button_G.configure(state="disabled")
+
+        button_H.configure(state="disabled")
+
+        button_I.configure(state="disabled")
+
+        button_J.configure(state="disabled")
+
+        button_K.configure(state="disabled")
+
+        button_L.configure(state="disabled")
+
+        button_M.configure(state="disabled")
+
+        button_N.configure(state="disabled")
+
+        button_O.configure(state="disabled")
+
+        button_P.configure(state="disabled")
+
+        button_Q.configure(state="disabled")
+
+        button_R.configure(state="disabled")
+
+        button_S.configure(state="disabled")
+
+        button_T.configure(state="disabled")
+
+        button_U.configure(state="disabled")
+
+        button_V.configure(state="disabled")
+
+        button_W.configure(state="disabled")
+
+        button_X.configure(state="disabled")
+
+        button_Y.configure(state="disabled")
+
+        button_Z.configure(state="disabled")
 
 
 # Cleans-up existing UI
@@ -229,6 +283,8 @@ def Win():
     global text_status
     text_status.configure(text="You won!")
 
+    button_disable()
+
     global button_continue
     button_continue = Button(win, text="New Game", font="bold", command=lambda: new_game())
     button_continue.place(x=450, y=160)
@@ -241,6 +297,8 @@ def Lose():
 
     global correct_Word
     correct_word.configure(text="Correct Word : " + str(hiddenword))
+
+    button_disable()
 
     global button_continue
     button_continue = Button(win, text="Restart", font="bold", command=lambda: restart())
