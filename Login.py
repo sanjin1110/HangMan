@@ -1,10 +1,16 @@
 from tkinter import *
+import Hangman
 root=Tk()
+
 root.title("LOG-IN")
 root.minsize(600,500)
 root.maxsize(600,600)
 root.configure(bg="antique white")
 root.iconbitmap('icon.ico')
+
+def link():
+    filename=open("Hangman.py", "w")
+
 
 lab0=Label(root,text='Sign Up',font=20,bg='antique white')
 lab0.grid(row=0,column=1,padx=10,pady=10)
@@ -28,7 +34,7 @@ ent3.grid(row=4,column=2)
 ent4=Entry(root,width=30)
 ent4.grid(row=5,column=2)
 
-but1=Button(root,text='LOGIN',bg='white', fg='green2')
+but1=Button(root,text='LOGIN',bg='white', fg='green2', command=link)
 but1.grid(row=9,column=2,columnspan = 5)
 
 r1=Checkbutton(root,text='I accept Terms Of Use & Privacy Policy')

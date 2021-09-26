@@ -1,62 +1,66 @@
-from tkinter import*
-from PIL import ImageTk,Image
+from tkinter import *
+from PIL import ImageTk, Image
 import random
 
+
+
+
 # Created word_list for hangman
-word_list=["CAT","BEAR", "LION", "COMPUTER","CHINA", "NEPAL","DENMARK","HEN", "DOVE", "CRANE", "NAME", "PLACE", "FAST",
-           "SLOW", "KING", "THOR", "KRATOS", "DANTE", "VIDEO", "MUSIC" ]
+word_list = ["CAT", "BEAR", "LION", "COMPUTER", "CHINA", "NEPAL", "DENMARK", "HEN", "DOVE", "CRANE", "NAME", "PLACE",
+             "FAST",
+             "SLOW", "KING", "THOR", "KRATOS", "DANTE", "VIDEO", "MUSIC"]
 
-#Setup score and chances
-tries=6
-score=0
+# Setup score and chances
+tries = 6
+score = 0
 
-#shows path of images in folder
-image_path=["hangman6.png","hangman5.png","hangman4.png","hangman3.png","hangman2.png","hangman1.png","hangman0.png"]
+# shows path of images in folder
+image_path = ["hangman6.png", "hangman5.png", "hangman4.png", "hangman3.png", "hangman2.png", "hangman1.png",
+              "hangman0.png"]
 
-#Created tkinter window
-win=Tk()
+# Created tkinter window
+win = Tk()
 win.title("Hangman")
 win.geometry("600x500")
-win.resizable(0,0)
+win.resizable(0, 0)
 win.iconbitmap("Hangman.ico")
 
 
-#setup Hangman UI
+# setup Hangman UI
 def init():
     global hiddenword
-    hiddenword=random.choice(word_list)
+    hiddenword = random.choice(word_list)
     global guessword
-    guessword=[]
+    guessword = []
     for character in hiddenword:
         guessword.append("__")
 
     global lives
-    lives=Label(win, text="Tries left : "+str(tries), font="bold")
+    lives = Label(win, text="Tries left : " + str(tries), font="bold")
     lives.place(x=450, y=0)
 
     global text_status
-    text_status=Label(win, font="bold")
-    text_status.place(x=250, y=100 )
+    text_status = Label(win, font="bold")
+    text_status.place(x=250, y=100)
 
     global score_status
-    score_status=Label(win, text="Score : "+ str(score), font="bold")
+    score_status = Label(win, text="Score : " + str(score), font="bold")
     score_status.place(x=455, y=25)
 
     global word_display
-    word_display=Label(win,text=guessword, font="20" "bold")
-    word_display.place(x=200,y=160)
+    word_display = Label(win, text=guessword, font="20" "bold")
+    word_display.place(x=200, y=160)
 
     global correct_word
-    correct_word=Label(win, font="bold")
+    correct_word = Label(win, font="bold")
     correct_word.place(x=200, y=200)
 
-    global button_A,button_B,button_C,button_D,button_E,button_F,button_G,button_H,button_I,button_J,button_K,button_L,\
-        button_M,button_N,button_O,button_P,button_Q,button_R,button_S,button_T,button_U,button_V,button_W,button_X,\
-        button_Y,button_Z
+    global button_A, button_B, button_C, button_D, button_E, button_F, button_G, button_H, button_I, button_J, button_K, button_L, \
+        button_M, button_N, button_O, button_P, button_Q, button_R, button_S, button_T, button_U, button_V, button_W, button_X, \
+        button_Y, button_Z
 
     button_A = Button(win, text="A", width=3, height=1, command=lambda: game_update("A"))
     button_A.place(x=10, y=400)
-
 
     button_B = Button(win, text="B", width=3, height=1, command=lambda: game_update("B"))
     button_B.place(x=60, y=400)
@@ -141,35 +145,37 @@ def init():
     panel = Label(win, image=img)
     panel.place(x=0, y=100)
 
-#Updates Game when button is pressed.
+
+# Updates Game when button is pressed.
 def game_update(guess):
     global tries
     global hiddenword
     global score
 
     if guess in hiddenword:
-        array=list(hiddenword)
+        array = list(hiddenword)
         for i in range(0, len(hiddenword)):
-            if str(array[i])==guess:
-                guessword[i]=str(guess)
+            if str(array[i]) == guess:
+                guessword[i] = str(guess)
         word_display.configure(text=guessword)
         score = score + 1
         score_status.configure(text="Score : " + str(score))
         if not "__" in guessword:
             Win()
     else:
-        tries=tries-1
+        tries = tries - 1
         image = Image.open(image_path[tries])
         image = image.resize((200, 200), Image.ANTIALIAS)
         img = ImageTk.PhotoImage(image)
         panel.configure(image=img)
-        panel.image=img
-        if tries==0:
+        panel.image = img
+        if tries == 0:
             Lose()
-        lives.configure(text="Tries left : "+str(tries))
+        lives.configure(text="Tries left : " + str(tries))
         word_display.configure(text=guessword)
 
-#Prevents reuse of same button
+
+# Prevents reuse of same button
 def game_disable():
     button_A.configure(state="disabled")
     button_B.configure(state="disabled")
@@ -198,7 +204,8 @@ def game_disable():
     button_Y.configure(state="disabled")
     button_Z.configure(state="disabled")
 
-#Cleans-up existing UI
+
+# Cleans-up existing UI
 def game_destroy():
     button_A.destroy()
     button_B.destroy()
@@ -234,9 +241,9 @@ def game_destroy():
     text_status.destroy()
     correct_word.destroy()
 
-#Shows win menu when game is won
-def Win():
 
+# Shows win menu when game is won
+def Win():
     global text_status
     text_status.configure(text="You won!")
 
@@ -246,15 +253,14 @@ def Win():
     button_continue = Button(win, text="New Game", font="bold", command=lambda: new_game())
     button_continue.place(x=450, y=160)
 
-#Shows lose menu when game is lost
-def Lose():
 
+# Shows lose menu when game is lost
+def Lose():
     global text_status
-    text_status.configure(text="YOU LOSE!" , font="bold")
+    text_status.configure(text="YOU LOSE!", font="bold")
 
     global correct_Word
-    correct_word.configure(text="Correct Word : "+ str(hiddenword))
-
+    correct_word.configure(text="Correct Word : " + str(hiddenword))
 
     game_disable()
 
@@ -262,29 +268,31 @@ def Lose():
     button_continue = Button(win, text="Restart", font="bold", command=lambda: restart())
     button_continue.place(x=450, y=160)
 
+
 # Starts new game after winning
 def new_game():
-
     game_destroy()
 
     global score
-    score=0
+    score = 0
 
     global tries
-    tries=6
+    tries = 6
 
     init()
 
-#restarts game when game is lost
+
+# restarts game when game is lost
 def restart():
     game_destroy()
 
     global score
-    score=0
+    score = 0
 
     global tries
-    tries=6
+    tries = 6
     init()
+
 
 init()
 win.mainloop()
