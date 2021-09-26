@@ -154,8 +154,6 @@ def game_update(guess):
     global tries
     global hiddenword
     global score
-
-<<<<<<< HEAD
     if guess in hiddenword:
         array = list(hiddenword)
         for i in range(0, len(hiddenword)):
@@ -177,7 +175,6 @@ def game_update(guess):
             Lose()
         lives.configure(text="Tries left : " + str(tries))
         word_display.configure(text=guessword)
-=======
     try:
         if guess in hiddenword:
             array = list(hiddenword)
@@ -205,7 +202,7 @@ def game_update(guess):
                 print(msg)
     except FileNotFoundError as msg:
         print(msg)
->>>>>>> 1efa73388ccd2527ccdf03f51a6e9ee2daf458e5
+
 
 
 # Prevents reuse of same button
