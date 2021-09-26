@@ -1,5 +1,5 @@
 from tkinter import *
-import Hangman
+
 root=Tk()
 
 root.title("LOG-IN")
@@ -9,7 +9,8 @@ root.configure(bg="antique white")
 root.iconbitmap('icon.ico')
 
 def link():
-    filename=open("Hangman.py", "w")
+    filename=open("Hangman.py", "r")
+    root.destroy()
 
 
 lab0=Label(root,text='Sign Up',font=20,bg='antique white')
