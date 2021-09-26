@@ -150,27 +150,33 @@ def game_update(guess):
     global hiddenword
     global score
 
-    if guess in hiddenword:
-        array=list(hiddenword)
-        for i in range(0, len(hiddenword)):
-            if str(array[i])==guess:
-                guessword[i]=str(guess)
-        word_display.configure(text=guessword)
-        score = score + 1
-        score_status.configure(text="Score : " + str(score))
-        if not "__" in guessword:
-            Win()
-    else:
-        tries=tries-1
-        image = Image.open(image_path[tries])
-        image = image.resize((200, 200), Image.ANTIALIAS)
-        img = ImageTk.PhotoImage(image)
-        panel.configure(image=img)
-        panel.image=img
-        if tries==0:
-            Lose()
-        lives.configure(text="Tries left : "+str(tries))
-        word_display.configure(text=guessword)
+    try:
+        if guess in hiddenword:
+            array = list(hiddenword)
+            for i in range(0, len(hiddenword)):
+                if str(array[i]) == guess:
+                    guessword[i] = str(guess)
+            word_display.configure(text = guessword)
+            score = score + 1
+            score_status.configure(text = "Score : " + str(score))
+            if "__" not in guessword:
+                Win()
+        else:
+            try:
+                tries = tries - 1
+                image = Image.open(image_path[tries])
+                image = image.resize((200, 200), Image.ANTIALIAS)
+                img = ImageTk.PhotoImage(image)
+                panel.configure(image = img)
+                panel.image = img
+                if tries == 0:
+                    Lose()
+                lives.configure(text = "Tries left : " + str(tries))
+                word_display.configure(text = guessword)
+            except FileNotFoundError as msg:
+                print(msg)
+    except FileNotFoundError as msg:
+        print(msg)
 
 #Prevents reuse of same button
 def game_disable():
